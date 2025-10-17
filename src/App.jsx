@@ -1,10 +1,13 @@
 import React from 'react'
+import NavBar from "./components/NavBar.js";
+import Hero from './components/Hero.jsx';
 
 const App = () => {
     return (
-        <h1 class="text-3xl font-bold underline text-indigo-700">
-            Hello world!
-        </h1>
+       <main>
+           <NavBar />
+          <Hero />
+       </main>
     )
 }
 export default App
