@@ -25,8 +25,6 @@ export const ProductViewer = () => {
                         <div onClick={() => setColor("#2e2c2e")}
                              className={clsx("bg-neutral-900", color === "#2e2c2e" && "active")}
                         />
-
-
                     </div>
 
                     <div className="size-control">
