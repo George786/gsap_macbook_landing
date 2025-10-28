@@ -20,28 +20,20 @@ export default function MacbookModel(props) {
 
     const screen = useVideoTexture(texture)
 
-    useEffect(() => {
-        scene.traverse((child) => {
-            if (child.isMesh) {
-                if (!noChangeParts.includes(child.name)) {
-                    if (!child.material.userData.originalMaterial) {
-                        child.material.userData.originalMaterial = child.material;
-                        child.material = child.material.clone();
-                    }
-                    child.material.color.set(color);
-                }
-            }
-        });
-
-        return () => {
-            scene.traverse((child) => {
-                if (child.isMesh && child.material.userData.originalMaterial) {
-                    child.material.dispose();
-                }
-            });
-        };
-    }, [color]);
-
+           useEffect(() => {
+                 const targets = [];
+                  scene.traverse((child) => {
+                          if (child.isMesh && !noChangeParts.includes(child.name) && child.material) {
+                              targets.push(child);
+                          }
+                     });
+                 const c = new Color(color);
+                  targets.forEach((mesh) => {
+                          const m = mesh.material;
+                          if (Array.isArray(m)) m.forEach(mm => mm.color?.set(c));
+                         else m.color?.set(c);
+                      });
+           }, [color, scene]);
     return (
         <group {...props} dispose={null}>
             <mesh geometry={nodes.Object_10.geometry} material={materials.PaletteMaterial001} rotation={[Math.PI / 2, 0, 0]} />
@@ -62,7 +54,7 @@ export default function MacbookModel(props) {
             <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
             <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
             <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
-                <meshBasicMaterial map={screen} />
+                <meshBasicMaterial map={screen}  toneMapped={false} />
             </mesh>
             <mesh geometry={nodes.Object_127.geometry} material={materials.ZCDwChwkbBfITSW} rotation={[Math.PI / 2, 0, 0]} />
         </group>
