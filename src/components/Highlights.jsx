@@ -9,23 +9,25 @@ const Highlights = () => {
     const isMobile = useMediaQuery({  query: '(max-width: 1024px)' });
 
     useGSAP(() => {
-        gsap.fromTo(['.left-column', '.right-column'], 
-        {
-            y: 50,
-            opacity: 0
-        },
-        {
-            scrollTrigger: {
-                trigger: '#highlights',
-                start: isMobile ? 'bottom bottom' : 'top center'
+        gsap.fromTo(['.left-column', '.right-column'],
+            {
+                y: 50,
+                opacity: 0
             },
-            y: 0,
-            opacity: 1,
-            stagger: 0.5,
-            duration: 1,
-            ease: 'power1.inOut'
-        });
-    })
+            {
+                scrollTrigger: {
+                    trigger: '#highlights',
+                        start: isMobile ? 'bottom bottom' : 'top center',
+                        invalidateOnRefresh: true
+
+                },
+                y: 0,
+                opacity: 1,
+                stagger: 0.5,
+                duration: 1,
+                ease: 'power1.inOut'
+            });
+        }, [isMobile])
 
     return (
         <section id="highlights">

@@ -24,6 +24,7 @@ const noChangeParts = [
     "Object_52",
     "Object_21",
     "Object_10",
+    "Object_123",
 ];
 
 const performanceImages = [

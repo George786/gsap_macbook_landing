@@ -37,10 +37,10 @@ const ModelScroll = () => {
         const modelTimeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '#f-canvas',
-                start: 'top top',
-                end: 'bottom  top',
-                scrub: 1,
-                pin: true,
+                 start: 'top top',
+                 end: 'bottom top',
+                 scrub: isMobile ? false : 1,
+                 pin: isMobile ? false : true,
             }
         });
 
@@ -49,7 +49,7 @@ const ModelScroll = () => {
             scrollTrigger: {
                 trigger: '#f-canvas',
                 start: 'top center',
-                end: 'bottom  top',
+                end: 'bottom top',
                 scrub: 1,
             }
         })
@@ -82,7 +82,7 @@ const ModelScroll = () => {
             modelTimeline.kill();
             timeline.kill();
         };
-    }, [setTexture]);
+    }, [setTexture, isMobile]);
 
     return (
         <group ref={groupRef}>
