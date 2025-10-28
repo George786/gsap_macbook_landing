@@ -75,7 +75,14 @@ const ModelScroll = () => {
 
             .call(() => setTexture('/videos/feature-5.mp4'))
             .to('.box5', { opacity: 1, y: 0 })
-    }, []);
+
+        return () => {
+            modelTimeline.scrollTrigger?.kill();
+            timeline.scrollTrigger?.kill();
+            modelTimeline.kill();
+            timeline.kill();
+        };
+    }, [setTexture]);
 
     return (
         <group ref={groupRef}>
