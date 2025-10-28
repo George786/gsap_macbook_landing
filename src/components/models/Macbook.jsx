@@ -24,23 +24,11 @@ export default function MacbookModel(props) {
         scene.traverse((child) => {
             if (child.isMesh) {
                 if (!noChangeParts.includes(child.name)) {
-                    if (!child.material.userData.originalMaterial) {
-                        child.material.userData.originalMaterial = child.material;
-                        child.material = child.material.clone();
-                    }
-                    child.material.color.set(color);
+                    child.material.color = new Color(color);
                 }
             }
         });
-
-        return () => {
-            scene.traverse((child) => {
-                if (child.isMesh && child.material.userData.originalMaterial) {
-                    child.material.dispose();
-                }
-            });
-        };
-    }, [color]);
+    }, [color, scene]);
 
     return (
         <group {...props} dispose={null}>
